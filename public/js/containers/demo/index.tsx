@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import store from './model';
-
 
 interface DemoProps {
   count?: number,
   outstr?: string,
   Add?: React.MouseEventHandler<HTMLButtonElement>,
-  Reserve?: React.MouseEventHandler<HTMLButtonElement> 
+  Reverse?: React.MouseEventHandler<HTMLButtonElement> 
 };
 
 interface DemoState {
@@ -21,14 +19,14 @@ class Demo extends Component<DemoProps, DemoState> {
     count: PropTypes.number,
     outstr: PropTypes.string,
     Add: PropTypes.func,
-    Reserve: PropTypes.func
+    Reverse: PropTypes.func
   }
 
   static defaultProps = {
     count: 0,
     outstr: 'Hello World',
     Add: () => {},
-    Reserve: () => {}
+    Reverse: () => {}
   }
 
   constructor(props) {
@@ -40,19 +38,19 @@ class Demo extends Component<DemoProps, DemoState> {
   }
 
   render() {
-    const { Add, Reserve, count, outstr } = this.props;
+    const { Add, Reverse, count, outstr } = this.props;
     return (
       <div>
-        <button onClick={Reserve}>click me to reserve words</button>{outstr}
+        <button onClick={Reverse}>click me to Reverse words</button>{outstr}
         <button onClick={Add}>click me to add number</button> now number is : {count}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ ...state });
-const mapDispatchToProps = dispatch => ({
-  Add: dispatch.demo.add,
-  Reserve: dispatch.demo.reserve
+const mapStateToProps = (store: any) => ({ ...store.demo });
+const mapDispatchToProps = (store: any) => ({
+  Add: store.demo.add,
+  Reverse: store.demo.reverse
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Demo);

@@ -28,6 +28,7 @@
       "require": true,
       "module": true,
       "__dirname" : true,
-      "process": true
+      "process": true,
+      "__INIT_STATE__": true
   }
 }

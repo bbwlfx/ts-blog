@@ -14,7 +14,7 @@ module.exports = api => {
         }
       ],
       '@babel/react',
-      '@babel/typescript'
+      '@babel/typescript' 
     ],
     plugins: [
       [

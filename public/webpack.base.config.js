@@ -9,7 +9,7 @@ module.exports = {
   entry,
   context: __dirname,
   output: {
-    path: path.resolve(__dirname, './dist/public'),
+    path: path.resolve(__dirname, '../dist/public'),
     publicPath: '/static/',
     filename: '[name].js',
     chunkFilename: 'chunk.[name].js'
@@ -49,10 +49,11 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: ['.tsx', '.ts', 'js', 'jsx', 'json'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
     alias: {
-      components: path.resolve(__dirname, 'public/js/components'),
-      containers: path.resolve(__dirname, 'public/js/containers')
+      components: path.resolve(__dirname, './js/components'),
+      containers: path.resolve(__dirname, './js/containers'),
+      models: path.resolve(__dirname, './js/models')
     }
   }
 }

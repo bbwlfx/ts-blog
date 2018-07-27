@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "module": "esNext",
+    "target": "es2015",
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "lib": ["es2017", "dom"],
+    "baseUrl": ".",
+    "noEmit": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "noImplicitReturns": true
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.d.ts"]
+}
