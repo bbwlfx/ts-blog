@@ -1,0 +1,33 @@
+{
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+          "jsx": true,
+          "experimentalObjectRestSpread": true
+      }
+  },
+  "parser": "babel-eslint",
+  "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true,
+      "node": true
+  },
+  "plugins": ["react"],
+  "rules": {
+      "react/jsx-uses-vars": "error",
+      "react/jsx-uses-react": "error",
+      "react/prop-types": "error",
+      "react/require-default-props": "error",
+      "sort-imports":"error"
+  },
+  "globals": {
+      "Promise": true,
+      "require": true,
+      "module": true,
+      "__dirname" : true,
+      "process": true
+  }
+}
