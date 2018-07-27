@@ -22,6 +22,7 @@ module.exports = {
           containers: '../public/js/containers',
           models: '../public/js/models',
           controllers: './controllers',
+          decorators: '../public/js/decorators'
         },
         extensions: ['.ts', '.tsx', '.js', '.jsx']
       }

@@ -53,7 +53,8 @@ module.exports = {
     alias: {
       components: path.resolve(__dirname, './js/components'),
       containers: path.resolve(__dirname, './js/containers'),
-      models: path.resolve(__dirname, './js/models')
+      models: path.resolve(__dirname, './js/models'),
+      decorators: path.resolve(__dirname, './js/decorators')
     }
   }
 }
