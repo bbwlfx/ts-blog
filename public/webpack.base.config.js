@@ -10,7 +10,7 @@ module.exports = {
   context: __dirname,
   output: {
     path: path.resolve(__dirname, './dist/public'),
-    publicPath: './upload/',
+    publicPath: '/static/',
     filename: '[name].js',
     chunkFilename: 'chunk.[name].js'
   },
