@@ -7,6 +7,7 @@ import KoaPug from 'koa-pug';
 import redisStore from 'koa-redis';
 import koaRouter from 'koa-router';
 import userAgent from 'koa-useragent';
+import Loadable from 'react-loadable';
 import renderProxy from './utils/renderProxy';
 import config from './config';
 
@@ -39,13 +40,13 @@ renderProxy(app, config);
 const router = new koaRouter();
 
 import demoRouter from './routes/demo';
-import { render } from '../node_modules/_@types_react-dom@16.0.6@@types/react-dom';
 router.use('/demo', demoRouter.routes());
 
 app.use(router.routes()).use(router.allowedMethods());
 
 
-app.listen(config.server.port || 3333, () => {
+app.listen(config.server.port || 3333, async() => {
+  await Loadable.preloadAll();
   console.log('start server at port: ', config.server.port);
 });
 

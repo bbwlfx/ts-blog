@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"demo": 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "chunk." + ({}[chunkId]||chunkId) + ".js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,65 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var head = document.getElementsByTagName('head')[0];
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							var error = new Error('Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')');
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -77,7 +180,17 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/static/";
+/******/ 	__webpack_require__.p = "http://localhost:4001/static/";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -27263,29 +27376,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./js/constants/path.ts":
-/*!******************************!*\
-  !*** ./js/constants/path.ts ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Demo = void 0;
-var Demo = '/demo';
-exports.Demo = Demo;
-
-/***/ }),
-
-/***/ "./js/containers/demo/index.tsx":
-/*!**************************************!*\
-  !*** ./js/containers/demo/index.tsx ***!
-  \**************************************/
+/***/ "./js/components/loading.tsx":
+/*!***********************************!*\
+  !*** ./js/components/loading.tsx ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27299,17 +27393,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "../node_modules/_react@16.4.1@react/index.js"));
 
-var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "../node_modules/_prop-types@15.6.2@prop-types/index.js"));
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "../node_modules/_react-redux@5.0.7@react-redux/es/index.js");
-
-var _class, _temp;
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -27329,70 +27413,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-;
-var Demo = (_temp = _class =
+var Loading =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Demo, _Component);
+  _inherits(Loading, _Component);
 
-  function Demo(props) {
-    var _this;
+  function Loading() {
+    _classCallCheck(this, Loading);
 
-    _classCallCheck(this, Demo);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Demo).call(this, props));
-    _this.state = {
-      count: props.count,
-      outstr: props.outstr
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Loading).apply(this, arguments));
   }
 
-  _createClass(Demo, [{
+  _createClass(Loading, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          Add = _this$props.Add,
-          Reverse = _this$props.Reverse,
-          count = _this$props.count,
-          outstr = _this$props.outstr;
-      return _react.default.createElement("div", null, _react.default.createElement("button", {
-        onClick: Reverse
-      }, "click me to Reverse words"), outstr, _react.default.createElement("button", {
-        onClick: Add
-      }, "click me to add number"), " now number is : ", count);
+      return _react.default.createElement("div", null, "Loading...");
     }
   }]);
 
-  return Demo;
-}(_react.Component), _defineProperty(_class, "propTypes", {
-  count: _propTypes.default.number,
-  outstr: _propTypes.default.string,
-  Add: _propTypes.default.func,
-  Reverse: _propTypes.default.func
-}), _defineProperty(_class, "defaultProps", {
-  count: 0,
-  outstr: 'Hello World',
-  Add: function Add() {},
-  Reverse: function Reverse() {}
-}), _temp);
+  return Loading;
+}(_react.Component);
 
-var mapStateToProps = function mapStateToProps(store) {
-  return _objectSpread({}, store.demo);
-};
+exports.default = Loading;
 
-var mapDispatchToProps = function mapDispatchToProps(store) {
-  return {
-    Add: store.demo.add,
-    Reverse: store.demo.reverse
-  };
-};
+/***/ }),
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Demo);
+/***/ "./js/constants/path.ts":
+/*!******************************!*\
+  !*** ./js/constants/path.ts ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-exports.default = _default;
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Demo = void 0;
+var Demo = '/demo';
+exports.Demo = Demo;
 
 /***/ }),
 
@@ -27451,23 +27512,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _demo = _interopRequireDefault(__webpack_require__(/*! containers/demo */ "./js/containers/demo/index.tsx"));
-
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "../node_modules/_react@16.4.1@react/index.js"));
 
 var _configure = _interopRequireDefault(__webpack_require__(/*! models/configure */ "./js/models/configure.ts"));
 
 var _entry = _interopRequireDefault(__webpack_require__(/*! decorators/entry */ "./js/decorators/entry.tsx"));
 
-var _router = _interopRequireDefault(__webpack_require__(/*! ./router */ "./js/entry/demo/router.tsx"));
+var _routes = _interopRequireDefault(__webpack_require__(/*! ./routes */ "./js/entry/demo/routes.tsx"));
 
-var _router2 = __webpack_require__(/*! @reach/router */ "../node_modules/_@reach_router@1.1.1@@reach/router/es/index.js");
+var _router = __webpack_require__(/*! @reach/router */ "../node_modules/_@reach_router@1.1.1@@reach/router/es/index.js");
 
 var _dec, _class;
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -27487,24 +27546,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-(0, _entry.default)(_configure.default)(_demo.default);
-var App = (_dec = (0, _entry.default)(_configure.default), _dec(_class =
+var Demo = (_dec = (0, _entry.default)(_configure.default), _dec(_class =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(App, _Component);
+  _inherits(Demo, _Component);
 
-  function App() {
-    _classCallCheck(this, App);
+  function Demo() {
+    _classCallCheck(this, Demo);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(App).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(Demo).apply(this, arguments));
   }
 
-  _createClass(App, [{
+  _createClass(Demo, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement(_router2.Router, {
+      return _react.default.createElement(_router.Router, {
         basepath: "/"
-      }, _router.default.map(function (_ref) {
+      }, _routes.default.map(function (_ref) {
         var name = _ref.name,
             path = _ref.path,
             Component = _ref.component;
@@ -27516,15 +27574,15 @@ function (_Component) {
     }
   }]);
 
-  return App;
+  return Demo;
 }(_react.Component)) || _class);
-exports.default = App;
+exports.default = Demo;
 
 /***/ }),
 
-/***/ "./js/entry/demo/router.tsx":
+/***/ "./js/entry/demo/routes.tsx":
 /*!**********************************!*\
-  !*** ./js/entry/demo/router.tsx ***!
+  !*** ./js/entry/demo/routes.tsx ***!
   \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -27539,9 +27597,9 @@ exports.default = void 0;
 
 var _reactLoadable = _interopRequireDefault(__webpack_require__(/*! react-loadable */ "../node_modules/_react-loadable@5.4.0@react-loadable/lib/index.js"));
 
-var _react = _interopRequireDefault(__webpack_require__(/*! react */ "../node_modules/_react@16.4.1@react/index.js"));
-
 var Path = _interopRequireWildcard(__webpack_require__(/*! constants/path */ "./js/constants/path.ts"));
+
+var _loading = _interopRequireDefault(__webpack_require__(/*! components/loading */ "./js/components/loading.tsx"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -27552,13 +27610,13 @@ var _default = [{
   path: Path.Demo,
   component: (0, _reactLoadable.default)({
     loader: function loader() {
-      return Promise.resolve(/*! import() */).then(__webpack_require__.t.bind(null, /*! containers/demo */ "./js/containers/demo/index.tsx", 7));
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! containers/demo */ "./js/containers/demo/index.tsx", 7));
     },
     modules: ['containers/demo'],
     webpack: function webpack() {
       return [/*require.resolve*/(/*! containers/demo */ "./js/containers/demo/index.tsx")];
     },
-    loading: _react.default.createElement("div", null, "Loading...")
+    loading: _loading.default
   })
 }];
 exports.default = _default;

@@ -1,6 +1,6 @@
 import Loadable from 'react-loadable';
-import React from 'react';
 import * as Path from 'constants/path';
+import Loading from 'components/loading';
 
 export default [
   {
@@ -8,7 +8,7 @@ export default [
     path: Path.Demo,
     component: Loadable({
       loader: () => import('containers/demo'),
-      loading: <div>Loading...</div>
+      loading: Loading
     })
   }
 ];

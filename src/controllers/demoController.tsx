@@ -2,7 +2,6 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import Demo from 'containers/demo';
-import { init } from '@rematch/core';
 import configureStore from 'models/configure';
 
 const demo: object = {
