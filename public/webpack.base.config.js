@@ -54,7 +54,8 @@ module.exports = {
       components: path.resolve(__dirname, './js/components'),
       containers: path.resolve(__dirname, './js/containers'),
       models: path.resolve(__dirname, './js/models'),
-      decorators: path.resolve(__dirname, './js/decorators')
+      decorators: path.resolve(__dirname, './js/decorators'),
+      constants: path.resolve(__dirname, './js/constants')
     }
   }
 }

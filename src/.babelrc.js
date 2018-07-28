@@ -13,6 +13,7 @@ module.exports = {
   ],
   plugins: [
     '@babel/plugin-proposal-class-properties',
+    'transform-decorators-legacy',
     [
       'babel-plugin-module-resolver',
       {

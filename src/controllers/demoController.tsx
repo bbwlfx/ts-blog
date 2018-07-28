@@ -7,13 +7,13 @@ import configureStore from 'models/configure';
 
 const demo: object = {
   async index (ctx) {
-    const initProps = {
+    const store = configureStore({
       demo: {
         count: 0,
         outstr: 'Hello World'
       }
-    };
-    const store = configureStore(initProps);
+    });
+    const initState = store.getState();
     const dom = (
       <Provider store={store}>
         <Demo />
@@ -22,7 +22,7 @@ const demo: object = {
     const html:string = renderToString(dom);
     ctx.render('demo', {
       html,
-      __INIT_PROPS__: JSON.stringify(initProps)
+      __INIT_PROPS__: JSON.stringify(initState)
     });
   }
 }
