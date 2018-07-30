@@ -1,8 +1,8 @@
-const baseConfig = require('./webpack.base.config');
+const clientConfig = require('./webpack.client.config');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const WriteFilePlugin = require('write-file-webpack-plugin');
-module.exports = merge(baseConfig, {
+module.exports = merge(clientConfig, {
   mode: 'development',
   devServer: {
     host: '0.0.0.0',

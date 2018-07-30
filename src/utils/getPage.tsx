@@ -10,7 +10,7 @@ export default function getPage({
   Component,
   page
 }) {
-  const stats = require('../../dist/server/react-loadable.json');
+  const stats = require('../../dist/public/react-loadable.json');
   const manifest = require('../../dist/public/manifest.json');
   const mainjs = getScript(manifest[`${page}.css`]);
   const maincss = getStyle(manifest[`${page}.js`]);

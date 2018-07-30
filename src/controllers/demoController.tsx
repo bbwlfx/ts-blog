@@ -1,5 +1,5 @@
 import configureStore from 'models/configure';
-import Demo from 'entry/demo';
+import Demo from 'server/demo';
 import getPage from '../utils/getPage';
 
 const demo: object = {
