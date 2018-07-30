@@ -9,17 +9,17 @@ export const demo = {
     '@init': (state: stateType, init: stateType) => {
       return { ...state, ...init };
     }, 
-    add(state: stateType) {
+    add(state: stateType, num) {
       return {
         ...state,
-        count: state.count + 1
-      }
+        count: state.count + (num | 1)
+      };
     },
     reverse(state: stateType) {
       return {
         ...state,
-        outstr: state.outstr.split('').reverse().join('')
-      }
+        outstr: state.outstr.split('').reverse().join('') 
+      };
     }
   }
 }

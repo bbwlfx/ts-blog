@@ -16,13 +16,6 @@ module.exports = {
     'transform-decorators-legacy',
     'dynamic-import-node',
     [
-      'import',
-      {
-        libraryName: 'antd',
-        style: true 
-      }
-    ],
-    [
       'babel-plugin-module-resolver',
       {
         cwd: 'babelrc',

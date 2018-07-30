@@ -1,36 +1,22 @@
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { Provider } from 'react-redux';
 import configureStore from 'models/configure';
 import Demo from 'entry/demo';
-import Loadable from 'react-loadable';
+import getPage from '../utils/getPage';
 
 const demo: object = {
   async index (ctx) {
     const store = configureStore({
       demo: {
-        count: 0,
-        outstr: 'Hello World'
+        count: 10,
+        outstr: 'Hello World!'
       }
     });
-    const initState = store.getState();
-    // const dom = (
-    //   <Provider store={store}>
-    //     <Demo />
-    //   </Provider>
-    // );
-    let modules = [];
-    const dom = (
-      <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-        <Demo url={ctx.url} store={store} />
-      </Loadable.Capture>
-    );
-    const html:string = renderToString(dom);
-    ctx.render('demo', {
-      html,
-      __INIT_PROPS__: JSON.stringify(initState),
-      IS_NODE: true
+    const page = getPage({
+      store,
+      url: ctx.url,
+      Component: Demo,
+      page: 'demo'
     });
+    ctx.render('demo', page);
   }
 }
 export default demo;

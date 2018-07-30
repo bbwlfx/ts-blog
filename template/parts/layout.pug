@@ -1,4 +1,3 @@
-include ./mixin.pug
 doctype html
 
 html
@@ -6,13 +5,13 @@ html
     meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
     meta(charset="utf-8")
     include ./common_state.pug
-    block style
     block links
+    | !{ styles }
     block common_title
       title BLOG
     include counter.pug
     block custom_state
   body
     block doms
-      #root
-    block scripts
+      #root !{ html }
+    | !{ scripts }

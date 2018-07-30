@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { ReactLoadablePlugin } = require('react-loadable/webpack');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const entry = require('./js/scripts/get_entry'); 
 module.exports = {
@@ -43,10 +45,14 @@ module.exports = {
     ]
   },
   plugins: [
+    new ReactLoadablePlugin({
+      filename: path.resolve(path.resolve(__dirname, '../dist/server'), 'react-loadable.json')
+    }),
     new ExtractTextPlugin({
       filename: '[name].css',
       allChunks: true
-    })
+    }),
+    new ManifestPlugin()
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.json']
