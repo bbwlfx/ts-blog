@@ -1,4 +1,5 @@
 const baseConfig = require('./webpack.base.config');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 module.exports = merge(baseConfig, {
@@ -11,5 +12,7 @@ module.exports = merge(baseConfig, {
     disableHostCheck: true,
     historyApiFallback: true
   },
-  plugins: [new WriteFilePlugin()]
+  plugins: [
+    new WriteFilePlugin()
+  ]
 });

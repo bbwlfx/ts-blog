@@ -1,8 +1,9 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import Demo from 'containers/demo';
 import configureStore from 'models/configure';
+import Demo from 'entry/demo';
+import Loadable from 'react-loadable';
 
 const demo: object = {
   async index (ctx) {
@@ -13,15 +14,22 @@ const demo: object = {
       }
     });
     const initState = store.getState();
+    // const dom = (
+    //   <Provider store={store}>
+    //     <Demo />
+    //   </Provider>
+    // );
+    let modules = [];
     const dom = (
-      <Provider store={store}>
-        <Demo />
-      </Provider>
+      <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+        <Demo url={ctx.url} store={store} />
+      </Loadable.Capture>
     );
     const html:string = renderToString(dom);
     ctx.render('demo', {
       html,
-      __INIT_PROPS__: JSON.stringify(initState)
+      __INIT_PROPS__: JSON.stringify(initState),
+      IS_NODE: true
     });
   }
 }

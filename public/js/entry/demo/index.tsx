@@ -4,7 +4,7 @@ import entry from 'decorators/entry';
 import Routes from './routes';
 import { Router } from '@reach/router';
 
-export default @entry(configureStore) class Demo extends Component {
+export default @entry(configureStore) class App extends Component {
   render() {
     return (
       <Router basepath="/">

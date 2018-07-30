@@ -1,2 +1,7 @@
 /node_modules/
 /dist/
+server/public/
+.cache/
+.db/
+.vscode/
+*.log

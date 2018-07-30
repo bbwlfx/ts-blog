@@ -2619,20 +2619,6 @@ var reservedNames = ["uri", "path"];
 
 /***/ }),
 
-/***/ "../node_modules/_@rematch_immer@1.0.2@@rematch/immer/dist/rematch-immer.umd.js":
-/*!**************************************************************************************!*\
-  !*** ../node_modules/_@rematch_immer@1.0.2@@rematch/immer/dist/rematch-immer.umd.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global, process, module) {!function(e,t){ true?t(exports):undefined}(this,function(e){"use strict";var t="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},n="undefined"!=typeof Symbol?Symbol("immer-proxy-state"):"__$immer_state",o="An immer producer returned a new value *and* modified its draft. Either return a new value *or* modify the draft.";var i=!("undefined"!=typeof process||"verifyMinified"!==function(){}.name),u="undefined"!=typeof Proxy;function f(e){return!!e&&!!e[n]}function a(e){if(!e)return!1;if("object"!==(void 0===e?"undefined":r(e)))return!1;if(Array.isArray(e))return!0;var t=Object.getPrototypeOf(e);return null===t||t===Object.prototype}function c(e){return i&&Object.freeze(e),e}function d(e){return Array.isArray(e)?e.slice():void 0===e.__proto__?Object.assign(Object.create(null),e):Object.assign({},e)}function s(e,t){if(Array.isArray(e))for(var r=0;r<e.length;r++)t(r,e[r]);else for(var n in e)t(n,e[n])}function l(e,t){return Object.prototype.hasOwnProperty.call(e,t)}function p(e){if(f(e)){var t=e[n];return!0===t.modified?!0===t.finalized?t.copy:(t.finalized=!0,function(e,t){var r=t.base;return s(e,function(t,n){n!==r[t]&&(e[t]=p(n))}),c(e)}(u?t.copy:t.copy=d(e),t)):t.base}return function e(t){if(!a(t))return;if(Object.isFrozen(t))return;s(t,function(r,n){f(n)?t[r]=p(n):e(n)});c(t)}(e),e}function y(e,t){return e===t?0!==e||1/e==1/t:e!=e&&t!=t}var b=null,h={get:function(e,t){if(t===n)return e;if(e.modified){var r=e.copy[t];return r===e.base[t]&&a(r)?e.copy[t]=g(e,r):r}if(l(e.proxies,t))return e.proxies[t];var o=e.base[t];return!f(o)&&a(o)?e.proxies[t]=g(e,o):o},has:function(e,t){return t in m(e)},ownKeys:function(e){return Reflect.ownKeys(m(e))},set:function(e,t,r){if(!e.modified){if(t in e.base&&y(e.base[t],r)||l(e.proxies,t)&&e.proxies[t]===r)return!0;w(e)}return e.copy[t]=r,!0},deleteProperty:function(e,t){return w(e),delete e.copy[t],!0},getOwnPropertyDescriptor:function(e,t){var r=e.modified?e.copy:l(e.proxies,t)?e.proxies:e.base,n=Reflect.getOwnPropertyDescriptor(r,t);!n||Array.isArray(r)&&"length"===t||(n.configurable=!0);return n},defineProperty:function(){throw new Error("Immer does currently not support defining properties on draft objects")},setPrototypeOf:function(){throw new Error("Don't even try this...")}},v={};function m(e){return!0===e.modified?e.copy:e.base}function w(e){e.modified||(e.modified=!0,e.copy=d(e.base),Object.assign(e.copy,e.proxies),e.parent&&w(e.parent))}function g(e,t){var r=function(e,t){return{modified:!1,finalized:!1,parent:e,base:t,copy:void 0,proxies:{}}}(e,t),n=Array.isArray(t)?Proxy.revocable([r],v):Proxy.revocable(r,h);return b.push(n),n.proxy}s(h,function(e,t){v[e]=function(){return arguments[0]=arguments[0][0],t.apply(this,arguments)}});var j={},O=null;function x(e){return e.hasCopy?e.copy:e.base}function E(e){e.modified||(e.modified=!0,e.parent&&E(e.parent))}function A(e){e.hasCopy||(e.hasCopy=!0,e.copy=d(e.base))}function P(e,t){var r=d(t);s(t,function(e){var t;Object.defineProperty(r,""+e,j[t=""+e]||(j[t]={configurable:!0,enumerable:!0,get:function(){return function(e,t){S(e);var r=x(e)[t];return!e.finalizing&&r===e.base[t]&&a(r)?(A(e),e.copy[t]=P(e,r)):r}(this[n],t)},set:function(e){!function(e,t,r){if(S(e),!e.modified){if(y(x(e)[t],r))return;E(e),A(e)}e.copy[t]=r}(this[n],t,e)}}))});var o=function(e,t,r){return{modified:!1,hasCopy:!1,parent:e,base:r,proxy:t,copy:void 0,finished:!1,finalizing:!1,finalized:!1}}(e,r,t);return Object.defineProperty(r,n,{value:o,enumerable:!1,writable:!0}),O.push(o),r}function S(e){if(!0===e.finished)throw new Error("Cannot use a proxy that has been revoked. Did you pass an object from inside an immer function to an async process?")}function _(e){return!function(e,t){if(y(e,t))return!0;if("object"!==(void 0===e?"undefined":r(e))||null===e||"object"!==(void 0===t?"undefined":r(t))||null===t)return!1;var n=Object.keys(e),o=Object.keys(t);if(n.length!==o.length)return!1;for(var i=0;i<n.length;i++)if(!hasOwnProperty.call(t,n[i])||!y(e[n[i]],t[n[i]]))return!1;return!0}(Object.keys(e.base),Object.keys(e.proxy))}function I(e){var t=e.proxy;if(t.length!==e.base.length)return!0;var r=Object.getOwnPropertyDescriptor(t,t.length-1);return!(!r||r.get)}function R(e,t){var r=O;O=[];try{var i=P(void 0,e),u=t.call(i,i);s(O,function(e,t){t.finalizing=!0}),function(){for(var e=O.length-1;e>=0;e--){var t=O[e];!1===t.modified&&(Array.isArray(t.base)?I(t)&&E(t):_(t)&&E(t))}}();var f=void 0;if(void 0!==u&&u!==i){if(i[n].modified)throw new Error(o);f=p(u)}else f=p(i);return s(O,function(e,t){t.finished=!0}),f}finally{O=r}}function k(e,t){if(1!==arguments.length&&2!==arguments.length)throw new Error("produce expects 1 or 2 arguments, got "+arguments.length);if("function"==typeof e){if("function"==typeof t)throw new Error("if first argument is a function (curried invocation), the second argument to produce cannot be a function");var i=t,f=e;return function(){var e=arguments;return k(void 0===e[0]&&void 0!==i?i:e[0],function(t){return e[0]=t,f.apply(t,e)})}}if("function"!=typeof t)throw new Error("if first argument is not a function, the second argument to produce should be a function");if("object"!==(void 0===e?"undefined":r(e))||null===e)return t(e);if(!a(e))throw new Error("the first argument to an immer producer should be a primitive, plain object or array, got "+(void 0===e?"undefined":r(e))+': "'+e+'"');return u?function(e,t){var r=b;b=[];try{var i=g(void 0,e),u=t.call(i,i),f=void 0;if(void 0!==u&&u!==i){if(i[n].modified)throw new Error(o);f=p(u)}else f=p(i);return s(b,function(e,t){return t.revoke()}),f}finally{b=r}}(e,t):R(e,t)}var T=Object.freeze({setAutoFreeze:function(e){i=e},setUseProxies:function(e){u=e},default:k});var z=function(e){var t,r=e.Symbol;return"function"==typeof r?r.observable?t=r.observable:(t=r("observable"),r.observable=t):t="@@observable",t}("undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global: true?module:undefined),C={INIT:"@@redux/INIT"+Math.random().toString(36).substring(7).split("").join("."),REPLACE:"@@redux/REPLACE"+Math.random().toString(36).substring(7).split("").join(".")},D="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},N=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e};function M(e,t){var r=t&&t.type;return"Given "+(r&&'action "'+String(r)+'"'||"an action")+', reducer "'+e+'" returned undefined. To ignore an action, you must explicitly return the previous state. If you want this reducer to hold no value, you can return null instead of undefined.'}function U(e,t){return function(){return t(e.apply(this,arguments))}}function F(){for(var e=arguments.length,t=Array(e),r=0;r<e;r++)t[r]=arguments[r];return 0===t.length?function(e){return e}:1===t.length?t[0]:t.reduce(function(e,t){return function(){return e(t.apply(void 0,arguments))}})}var K,L=Object.freeze({createStore:function e(t,r,n){var o;if("function"==typeof r&&void 0===n&&(n=r,r=void 0),void 0!==n){if("function"!=typeof n)throw new Error("Expected the enhancer to be a function.");return n(e)(t,r)}if("function"!=typeof t)throw new Error("Expected the reducer to be a function.");var i=t,u=r,f=[],a=f,c=!1;function d(){a===f&&(a=f.slice())}function s(){if(c)throw new Error("You may not call store.getState() while the reducer is executing. The reducer has already received the state as an argument. Pass it down from the top reducer instead of reading it from the store.");return u}function l(e){if("function"!=typeof e)throw new Error("Expected the listener to be a function.");if(c)throw new Error("You may not call store.subscribe() while the reducer is executing. If you would like to be notified after the store has been updated, subscribe from a component and invoke store.getState() in the callback to access the latest state. See https://redux.js.org/api-reference/store#subscribe(listener) for more details.");var t=!0;return d(),a.push(e),function(){if(t){if(c)throw new Error("You may not unsubscribe from a store listener while the reducer is executing. See https://redux.js.org/api-reference/store#subscribe(listener) for more details.");t=!1,d();var r=a.indexOf(e);a.splice(r,1)}}}function p(e){if(!function(e){if("object"!==(void 0===e?"undefined":D(e))||null===e)return!1;for(var t=e;null!==Object.getPrototypeOf(t);)t=Object.getPrototypeOf(t);return Object.getPrototypeOf(e)===t}(e))throw new Error("Actions must be plain objects. Use custom middleware for async actions.");if(void 0===e.type)throw new Error('Actions may not have an undefined "type" property. Have you misspelled a constant?');if(c)throw new Error("Reducers may not dispatch actions.");try{c=!0,u=i(u,e)}finally{c=!1}for(var t=f=a,r=0;r<t.length;r++)(0,t[r])();return e}return p({type:C.INIT}),(o={dispatch:p,subscribe:l,getState:s,replaceReducer:function(e){if("function"!=typeof e)throw new Error("Expected the nextReducer to be a function.");i=e,p({type:C.REPLACE})}})[z]=function(){var e,t=l;return(e={subscribe:function(e){if("object"!==(void 0===e?"undefined":D(e))||null===e)throw new TypeError("Expected the observer to be an object.");function r(){e.next&&e.next(s())}return r(),{unsubscribe:t(r)}}})[z]=function(){return this},e},o},combineReducers:function(e){for(var t=Object.keys(e),r={},n=0;n<t.length;n++){var o=t[n];"function"==typeof e[o]&&(r[o]=e[o])}var i=Object.keys(r),u=void 0;try{!function(e){Object.keys(e).forEach(function(t){var r=e[t];if(void 0===r(void 0,{type:C.INIT}))throw new Error('Reducer "'+t+"\" returned undefined during initialization. If the state passed to the reducer is undefined, you must explicitly return the initial state. The initial state may not be undefined. If you don't want to set a value for this reducer, you can use null instead of undefined.");if(void 0===r(void 0,{type:"@@redux/PROBE_UNKNOWN_ACTION_"+Math.random().toString(36).substring(7).split("").join(".")}))throw new Error('Reducer "'+t+"\" returned undefined when probed with a random type. Don't try to handle "+C.INIT+' or other actions in "redux/*" namespace. They are considered private. Instead, you must return the current state for any unknown actions, unless it is undefined, in which case you must return the initial state, regardless of the action type. The initial state may not be undefined, but can be null.')})}(r)}catch(e){u=e}return function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},t=arguments[1];if(u)throw u;for(var n=!1,o={},f=0;f<i.length;f++){var a=i[f],c=e[a],d=(0,r[a])(c,t);if(void 0===d){var s=M(a,t);throw new Error(s)}o[a]=d,n=n||d!==c}return n?o:e}},bindActionCreators:function(e,t){if("function"==typeof e)return U(e,t);if("object"!==(void 0===e?"undefined":D(e))||null===e)throw new Error("bindActionCreators expected an object or a function, instead received "+(null===e?"null":void 0===e?"undefined":D(e))+'. Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?');for(var r=Object.keys(e),n={},o=0;o<r.length;o++){var i=r[o],u=e[i];"function"==typeof u&&(n[i]=U(u,t))}return n},applyMiddleware:function(){for(var e=arguments.length,t=Array(e),r=0;r<e;r++)t[r]=arguments[r];return function(e){return function(){for(var r=arguments.length,n=Array(r),o=0;o<r;o++)n[o]=arguments[o];var i=e.apply(void 0,n),u=function(){throw new Error("Dispatching while constructing your middleware is not allowed. Other middleware would not be applied to this dispatch.")},f={getState:i.getState,dispatch:function(){return u.apply(void 0,arguments)}},a=t.map(function(e){return e(f)});return u=F.apply(void 0,a)(i.dispatch),N({},i,{dispatch:u})}}},compose:F,__DO_NOT_USE__ActionTypes:C}),Y=T&&k||T,B=function(e,t){return e(t={exports:{}},t.exports),t.exports}(function(e,r){var n=t&&t.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(r,"__esModule",{value:!0});var o=n(Y);function i(e){for(var t={},r=function(e,r){t[e]=function(e,t){return"object"==typeof e?o.default(e,function(e){r(e,t)}):r(e,t)}},n=0,i=Object.entries(e);n<i.length;n++){var u=i[n];r(u[0],u[1])}return L.combineReducers(t)}r.default=function(){return{config:{redux:{combineReducers:i}}}}}),G=(K=B)&&K.__esModule&&Object.prototype.hasOwnProperty.call(K,"default")?K.default:K;e.default=G,Object.defineProperty(e,"__esModule",{value:!0})});
-//# sourceMappingURL=rematch-immer.umd.js.map
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../_webpack@4.16.2@webpack/buildin/global.js */ "../node_modules/_webpack@4.16.2@webpack/buildin/global.js"), __webpack_require__(/*! ./../../../_process@0.11.10@process/browser.js */ "../node_modules/_process@0.11.10@process/browser.js"), __webpack_require__(/*! ./../../../_webpack@4.16.2@webpack/buildin/module.js */ "../node_modules/_webpack@4.16.2@webpack/buildin/module.js")(module)))
-
-/***/ }),
-
 /***/ "../node_modules/_create-react-context@0.2.2@create-react-context/lib/implementation.js":
 /*!**********************************************************************************************!*\
   !*** ../node_modules/_create-react-context@0.2.2@create-react-context/lib/implementation.js ***!
@@ -4164,201 +4150,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 	return to;
 };
-
-
-/***/ }),
-
-/***/ "../node_modules/_process@0.11.10@process/browser.js":
-/*!***********************************************************!*\
-  !*** ../node_modules/_process@0.11.10@process/browser.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
 
 
 /***/ }),
@@ -27376,10 +27167,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./js/components/loading.tsx":
-/*!***********************************!*\
-  !*** ./js/components/loading.tsx ***!
-  \***********************************/
+/***/ "./js/components/loading/index.tsx":
+/*!*****************************************!*\
+  !*** ./js/components/loading/index.tsx ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27438,6 +27229,79 @@ exports.default = Loading;
 
 /***/ }),
 
+/***/ "./js/components/ssr/index.tsx":
+/*!*************************************!*\
+  !*** ./js/components/ssr/index.tsx ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "../node_modules/_react@16.4.1@react/index.js"));
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "../node_modules/_react-redux@5.0.7@react-redux/es/index.js");
+
+var _router = __webpack_require__(/*! @reach/router */ "../node_modules/_@reach_router@1.1.1@@reach/router/es/index.js");
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var _default = function _default(App) {
+  return (
+    /*#__PURE__*/
+    function (_Component) {
+      _inherits(SSR, _Component);
+
+      function SSR() {
+        _classCallCheck(this, SSR);
+
+        return _possibleConstructorReturn(this, _getPrototypeOf(SSR).apply(this, arguments));
+      }
+
+      _createClass(SSR, [{
+        key: "render",
+        value: function render() {
+          return _react.default.createElement(_reactRedux.Provider, {
+            store: this.props.store
+          }, _react.default.createElement(_router.ServerLocation, {
+            url: this.props.url
+          }, _react.default.createElement(App, null)));
+        }
+      }]);
+
+      return SSR;
+    }(_react.Component)
+  );
+};
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./js/constants/path.ts":
 /*!******************************!*\
   !*** ./js/constants/path.ts ***!
@@ -27480,18 +27344,24 @@ var _reactDom = _interopRequireDefault(__webpack_require__(/*! react-dom */ "../
 
 var _reactLoadable = _interopRequireDefault(__webpack_require__(/*! react-loadable */ "../node_modules/_react-loadable@5.4.0@react-loadable/lib/index.js"));
 
+var _ssr = _interopRequireDefault(__webpack_require__(/*! ../components/ssr */ "./js/components/ssr/index.tsx"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function entry(configureState) {
   return function (Component) {
-    var initProps = window.__INIT_PROPS__;
-    var store = configureState(initProps);
+    if (!window.IS_NODE) {
+      var initProps = window.__INIT_PROPS__;
+      var store = configureState(initProps);
 
-    _reactLoadable.default.preloadReady().then(function () {
-      _reactDom.default.hydrate(_react.default.createElement(_reactRedux.Provider, {
-        store: store
-      }, _react.default.createElement(Component, null)), document.getElementById('root'));
-    });
+      _reactLoadable.default.preloadReady().then(function () {
+        _reactDom.default.hydrate(_react.default.createElement(_reactRedux.Provider, {
+          store: store
+        }, _react.default.createElement(Component, null)), document.getElementById('root'));
+      });
+    }
+
+    return (0, _ssr.default)(Component);
   };
 }
 
@@ -27514,9 +27384,9 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "../node_modules/_react@16.4.1@react/index.js"));
 
-var _configure = _interopRequireDefault(__webpack_require__(/*! models/configure */ "./js/models/configure.ts"));
+var _configure = _interopRequireDefault(__webpack_require__(/*! ../../models/configure */ "./js/models/configure.ts"));
 
-var _entry = _interopRequireDefault(__webpack_require__(/*! decorators/entry */ "./js/decorators/entry.tsx"));
+var _entry = _interopRequireDefault(__webpack_require__(/*! ../../decorators/entry */ "./js/decorators/entry.tsx"));
 
 var _routes = _interopRequireDefault(__webpack_require__(/*! ./routes */ "./js/entry/demo/routes.tsx"));
 
@@ -27546,18 +27416,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Demo = (_dec = (0, _entry.default)(_configure.default), _dec(_class =
+var App = (_dec = (0, _entry.default)(_configure.default), _dec(_class =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Demo, _Component);
+  _inherits(App, _Component);
 
-  function Demo() {
-    _classCallCheck(this, Demo);
+  function App() {
+    _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Demo).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(App).apply(this, arguments));
   }
 
-  _createClass(Demo, [{
+  _createClass(App, [{
     key: "render",
     value: function render() {
       return _react.default.createElement(_router.Router, {
@@ -27574,9 +27444,9 @@ function (_Component) {
     }
   }]);
 
-  return Demo;
+  return App;
 }(_react.Component)) || _class);
-exports.default = Demo;
+exports.default = App;
 
 /***/ }),
 
@@ -27597,9 +27467,9 @@ exports.default = void 0;
 
 var _reactLoadable = _interopRequireDefault(__webpack_require__(/*! react-loadable */ "../node_modules/_react-loadable@5.4.0@react-loadable/lib/index.js"));
 
-var Path = _interopRequireWildcard(__webpack_require__(/*! constants/path */ "./js/constants/path.ts"));
+var Path = _interopRequireWildcard(__webpack_require__(/*! ../../constants/path */ "./js/constants/path.ts"));
 
-var _loading = _interopRequireDefault(__webpack_require__(/*! components/loading */ "./js/components/loading.tsx"));
+var _loading = _interopRequireDefault(__webpack_require__(/*! ../../components/loading */ "./js/components/loading/index.tsx"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -27610,11 +27480,11 @@ var _default = [{
   path: Path.Demo,
   component: (0, _reactLoadable.default)({
     loader: function loader() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! containers/demo */ "./js/containers/demo/index.tsx", 7));
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! ../../containers/demo */ "./js/containers/demo/index.tsx", 7));
     },
-    modules: ['containers/demo'],
+    modules: ["../../containers/demo"],
     webpack: function webpack() {
-      return [/*require.resolve*/(/*! containers/demo */ "./js/containers/demo/index.tsx")];
+      return [/*require.resolve*/(/*! ../../containers/demo */ "./js/containers/demo/index.tsx")];
     },
     loading: _loading.default
   })
@@ -27642,13 +27512,7 @@ var _core = __webpack_require__(/*! @rematch/core */ "../node_modules/_@rematch_
 
 var models = _interopRequireWildcard(__webpack_require__(/*! ./index */ "./js/models/index.ts"));
 
-var _immer = _interopRequireDefault(__webpack_require__(/*! @rematch/immer */ "../node_modules/_@rematch_immer@1.0.2@@rematch/immer/dist/rematch-immer.umd.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-var immer = (0, _immer.default)();
 
 function configure(initProps) {
   var store = (0, _core.init)({

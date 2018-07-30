@@ -4,6 +4,7 @@ export default function(app, config) {
   const ctx = app.context;
   const renderer = ctx.render;
   const proxy = function(tpl, locals, options, noCache) {
+    console.log(locals, options);
     const localConfig = {
       DEBUG: debug,
       path: config.path,

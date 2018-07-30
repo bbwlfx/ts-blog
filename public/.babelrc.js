@@ -34,7 +34,14 @@ module.exports = api => {
         {
           cwd: 'babelrc',
           extensions: ['.ts', '.tsx'],
-          root: ['./']
+          root: ['./'],
+          alias: {
+            components: './js/components',
+            containers: './js/containers',
+            models: './js/models',
+            decorators: './js/decorators',
+            constants: './js/constants'
+          }
         }
       ],
       'react-loadable/babel'
