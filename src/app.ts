@@ -9,6 +9,7 @@ import koaRouter from 'koa-router';
 import userAgent from 'koa-useragent';
 import Loadable from 'react-loadable';
 import renderProxy from './utils/renderProxy';
+import { sequelize, models } from './db';
 import config from './config';
 
 const app: any = new Koa();
@@ -23,9 +24,28 @@ new KoaPug({
   basedir: '../template',
   viewPath: path.join(__dirname, '../template')
 });
-
+// 扩展context
 app.use(async (ctx, next) => {
   ctx.config = config;
+  sequelize.sync();
+  ctx.sequelize = sequelize;
+  ctx.models = models;
+
+  ctx.success = (data = {}) => {
+    ctx.body = {
+      code: 0,
+      message: 'success',
+      data
+    };
+  };
+
+  ctx.fail = (message = 'fail', code = -1) => {
+    ctx.body = {
+      code,
+      message,
+      data: {}
+    };
+  };
   await next();
 })
   .use(userAgent);
