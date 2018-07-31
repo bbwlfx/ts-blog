@@ -10,7 +10,7 @@
 - Eslint（语法检测）
 - husky（precommit hooks，对提交代码进行处理）
 - antd（UI库）
-
+- sequelize（连接数据库Mysql）
 ## Start for Mac
 ```
 $ npm install

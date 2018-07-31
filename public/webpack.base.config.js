@@ -30,6 +30,10 @@ module.exports = {
         })
       },
       {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader']
+      },
+      {
         test: /\.md$/,
         use: ['raw-loader']
       },

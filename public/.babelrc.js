@@ -22,7 +22,8 @@ module.exports = api => {
         'import',
         {
           libraryName: 'antd',
-          style: true 
+          libraryDirectory: 'es',
+          style: 'css'
         }
       ],
        'dynamic-import-node',

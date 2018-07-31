@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Button } from 'antd';
 
 interface DemoProps {
   count?: number,
@@ -41,8 +42,8 @@ class Demo extends Component<DemoProps, DemoState> {
     const { Add, Reverse, count, outstr } = this.props;
     return (
       <div>
-        <button onClick={Reverse}>click me to Reverse words</button>{outstr}
-        <button onClick={Add}>click me to add number</button> now number is : {count}
+        <Button onClick={Reverse}>click me to Reverse words</Button>{outstr}
+        <Button onClick={Add}>click me to add number</Button> now number is : {count}
       </div>
     );
   }
