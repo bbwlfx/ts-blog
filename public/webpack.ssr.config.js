@@ -1,15 +1,15 @@
-const baseConfig = require('./webpack.base.config');
-const merge = require('webpack-merge');
-const path = require('path');
-const webpack = require('webpack');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
-const { ReactLoadablePlugin } = require('react-loadable/webpack');
-const outputDir = path.resolve(__dirname, '../dist/server/');
+const baseConfig = require("./webpack.base.config");
+const merge = require("webpack-merge");
+const path = require("path");
+const webpack = require("webpack");
+const cleanWebpackPlugin = require("clean-webpack-plugin");
+const { ReactLoadablePlugin } = require("react-loadable/webpack");
+const outputDir = path.resolve(__dirname, "../dist/server/");
 const ssrConfig = merge(baseConfig, {
   output: {
     path: outputDir,
-    filename: '[name].js',
-    libraryTarget: 'commonjs2'
+    filename: "[name].js",
+    libraryTarget: "commonjs2"
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({
@@ -20,7 +20,7 @@ const ssrConfig = merge(baseConfig, {
       IS_NODE: true
     })
   ],
-  target: 'node',
+  target: "node",
   node: {
     __filename: true,
     __dirname: true

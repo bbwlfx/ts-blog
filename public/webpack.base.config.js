@@ -1,60 +1,60 @@
-const webpack = require('webpack');
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const webpack = require("webpack");
+const path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ManifestPlugin = require("webpack-manifest-plugin");
 
-const entry = require('./js/scripts/get_entry'); 
+const entry = require("./js/scripts/get_entry");
 module.exports = {
-  mode: 'development',
-  devtool: 'source-map',
+  mode: "development",
+  devtool: "source-map",
   entry,
   context: __dirname,
   output: {
-    path: path.resolve(__dirname, '../dist/public'),
-    publicPath: 'http://localhost:4001/static/',
-    filename: '[name].js',
-    chunkFilename: 'chunk.[name].js'
+    path: path.resolve(__dirname, "../dist/public"),
+    publicPath: "http://localhost:4001/static/",
+    filename: "[name].js",
+    chunkFilename: "chunk.[name].js"
   },
   module: {
     rules: [
       {
         test: /\.(jsx?|tsx?)$/,
-        use: ['babel-loader'],
+        use: ["babel-loader"],
         exclude: /node_modules/
       },
       {
         test: /\.(css|sass)$/,
         loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
+          fallback: "style-loader",
+          use: ["css-loader", "sass-loader"]
         })
       },
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: ["style-loader", "css-loader", "less-loader"]
       },
       {
         test: /\.md$/,
-        use: ['raw-loader']
+        use: ["raw-loader"]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
+        use: ["file-loader"]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader']
+        use: ["file-loader"]
       }
     ]
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: '[name].css',
+      filename: "[name].css",
       allChunks: true
     }),
     new ManifestPlugin()
   ],
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json']
+    extensions: [".tsx", ".ts", ".js", ".jsx", ".json"]
   }
-}
+};

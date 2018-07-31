@@ -1,14 +1,14 @@
 interface stateType {
-  count?: number,
-  outstr?: string
-};
+  count?: number;
+  outstr?: string;
+}
 
 export const demo = {
   state: {},
   reducers: {
-    '@init': (state: stateType, init: stateType) => {
+    "@init": (state: stateType, init: stateType) => {
       return { ...state, ...init };
-    }, 
+    },
     add(state: stateType, num) {
       return {
         ...state,
@@ -18,8 +18,11 @@ export const demo = {
     reverse(state: stateType) {
       return {
         ...state,
-        outstr: state.outstr.split('').reverse().join('') 
+        outstr: state.outstr
+          .split("")
+          .reverse()
+          .join("")
       };
     }
   }
-}
+};
