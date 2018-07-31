@@ -12,7 +12,7 @@ export default class Studio extends Component<Props, States> {
     return (
       <div className="studio-container">
         <div className="studio-menu">
-          <Menu mode="inline" defaultSelectedKeys={["all"]}>
+          <Menu mode="inline" defaultSelectedKeys={["all_notes"]}>
             <Item key="new_note">
               <Icon type="plus-circle" />
               新笔记
