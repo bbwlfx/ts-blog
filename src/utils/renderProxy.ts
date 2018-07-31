@@ -3,7 +3,7 @@ const debug = process.env.NODE_ENV === 'development';
 export default function(app, config) {
   const ctx = app.context;
   const renderer = ctx.render;
-  const proxy = function(tpl, locals, options, noCache) {
+  const proxy = function(locals, options, noCache) {
     const localConfig = {
       DEBUG: debug,
       path: config.path,
@@ -15,7 +15,7 @@ export default function(app, config) {
       browserVersion: this.userAgent.version
     };
     const mergeLocals = Object.assign(localConfig, locals);
-    return renderer.call(this, tpl, mergeLocals, options, noCache);
+    return renderer.call(this, 'index', mergeLocals, options, noCache);
   };
   app.context.render = proxy;
 };

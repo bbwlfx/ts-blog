@@ -16,7 +16,7 @@ const demo: object = {
       Component: Demo,
       page: 'demo'
     });
-    ctx.render('demo', page);
+    ctx.render(page);
   }
 }
 export default demo;
