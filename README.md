@@ -2,6 +2,7 @@
 - @rematch（react状态管理，更好更简洁的redux）
 - Typescript（静态检查）
 - React（View）
+- react-loadable（按需加载）
 - @react/router（路由）
 - Webpack（打包工具）
 - Koa2（路由和渲染）
