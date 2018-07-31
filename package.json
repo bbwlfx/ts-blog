@@ -29,7 +29,7 @@
     "@types/validator": "^9.4.1",
     "antd": "^3.7.2",
     "axios": "^0.18.0",
-    "babel-eslint": "^8.2.3",
+    "babel-eslint": "^9.0.0-beta.3",
     "babel-loader": "8.0.0-beta.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dynamic-import-node": "^2.0.0",
@@ -87,17 +87,22 @@
     "client": "BABEL_ENV=client NODE_ENV=development webpack-dev-server --config public/webpack.dev.config.js",
     "start": "BABEL_ENV=server NODE_ENV=development nodemon src/app.ts --exec babel-node --extensions '.ts,.tsx'",
     "ssr": "BABEL_ENV=ssr NODE_ENV=production webpack --watch --config public/webpack.ssr.config.js",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "format": "prettier-eslint --write public/**/*.{js,ts}"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "prettier-eslint --write",
-      "eslint --fix",
+    "*.{ts,tsx}": [
+      "npm run format --",
       "git add"
     ],
-    "*.{css,scss}": [
-      "stylelint --syntax=scss --fix",
+    "*.{js,jsx}": [
+      "npm run format --",
+      "git add"
+    ],
+    "*.{css,less}": [
+      "npm run format --",
+      "stylelint --syntax=less",
       "git add"
     ]
-  }
+  } 
 }
