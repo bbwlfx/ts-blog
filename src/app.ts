@@ -60,7 +60,9 @@ renderProxy(app, config);
 const router = new koaRouter();
 
 import demoRouter from './routes/demo';
+import studioRouter from './routes/studio';
 router.use('/demo', demoRouter.routes());
+router.use('/studio', studioRouter.routes());
 
 app.use(router.routes()).use(router.allowedMethods());
 

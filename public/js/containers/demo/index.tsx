@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 
@@ -16,13 +15,6 @@ interface DemoState {
 }
 
 class Demo extends Component<DemoProps, DemoState> {
-  static propTypes = {
-    count: PropTypes.number,
-    outstr: PropTypes.string,
-    Add: PropTypes.func,
-    Reverse: PropTypes.func
-  }
-
   static defaultProps = {
     count: 0,
     outstr: 'Hello World',

@@ -12,8 +12,8 @@ export default function getPage({
 }) {
   const stats = require('../../dist/public/react-loadable.json');
   const manifest = require('../../dist/public/manifest.json');
-  const mainjs = getScript(manifest[`${page}.css`]);
-  const maincss = getStyle(manifest[`${page}.js`]);
+  const mainjs = getScript(manifest[`${page}.js`]);
+  const maincss = getStyle(manifest[`${page}.css`]);
 
   if(!Component && !store) {
     return {
