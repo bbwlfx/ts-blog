@@ -9,7 +9,7 @@ module.exports = merge(baseConfig, {
     chunkFilename: "chunk.[name].[chunkhash].js"
   },
   plugins: [
-    new cleanWebpackPlugin("dist/client"),
+    new cleanWebpackPlugin("../src/public"),
     new ExtractTextPlugin({
       filename: "[name].[chunkhash].css",
       allChunks: true

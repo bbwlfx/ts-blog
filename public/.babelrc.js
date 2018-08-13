@@ -1,49 +1,53 @@
 module.exports = api => {
   const env = api.env();
-  console.log('env: ', env);
+  // 服务端渲染时不加载css
+  const importConfig =
+    env === "client"
+      ? {
+          libraryName: "antd",
+          libraryDirectory: "es",
+          style: true
+        }
+      : {
+          libraryName: "antd"
+        };
 
   return {
     presets: [
       [
-        '@babel/env',
+        "@babel/env",
         {
-          modules: env === 'ssr' ? false : 'commonjs',
+          modules: env === "ssr" ? false : "commonjs",
           targets: {
-            browsers: ['last 2 versions']
+            browsers: ["last 2 versions"]
           }
         }
       ],
-      '@babel/react',
-      '@babel/typescript'
+      "@babel/react",
+      "@babel/typescript"
     ],
     plugins: [
-      'transform-decorators-legacy',
+      "transform-decorators-legacy",
+      ["import", importConfig],
+      "dynamic-import-node",
+      "@babel/plugin-proposal-class-properties",
       [
-        'import',
+        "babel-plugin-module-resolver",
         {
-          libraryName: 'antd',
-          libraryDirectory: 'es',
-          style: 'css'
-        }
-      ],
-       'dynamic-import-node',
-      '@babel/plugin-proposal-class-properties',
-      [
-        'babel-plugin-module-resolver',
-        {
-          cwd: 'babelrc',
-          extensions: ['.ts', '.tsx'],
-          root: ['./'],
+          cwd: "babelrc",
+          extensions: [".ts", ".tsx"],
+          root: ["./"],
           alias: {
-            components: './js/components',
-            containers: './js/containers',
-            models: './js/models',
-            decorators: './js/decorators',
-            constants: './js/constants'
+            components: "./js/components",
+            containers: "./js/containers",
+            models: "./js/models",
+            decorators: "./js/decorators",
+            constants: "./js/constants",
+            lib: "./js/lib"
           }
         }
       ],
-      'react-loadable/babel'
+      "react-loadable/babel"
     ]
-  }
-}
+  };
+};

@@ -1,17 +1,17 @@
 const webpack = require("webpack");
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const ManifestPlugin = require("webpack-manifest-plugin");
 
 const entry = require("./js/scripts/get_entry");
+
 module.exports = {
   mode: "development",
   devtool: "source-map",
   entry,
   context: __dirname,
   output: {
-    path: path.resolve(__dirname, "../dist/public"),
-    publicPath: "http://localhost:4001/static/",
+    path: path.resolve(__dirname, "../src/public"),
+    publicPath: `/static/`,
     filename: "[name].js",
     chunkFilename: "chunk.[name].js"
   },
@@ -31,7 +31,19 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: ["style-loader", "css-loader", "less-loader"]
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              modifyVars: {
+                "primary-color": "#1DA57A"
+              },
+              javascriptEnabled: true
+            }
+          }
+        ]
       },
       {
         test: /\.md$/,
@@ -51,8 +63,7 @@ module.exports = {
     new ExtractTextPlugin({
       filename: "[name].css",
       allChunks: true
-    }),
-    new ManifestPlugin()
+    })
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx", ".json"]

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { ServerLocation } from '@reach/router';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import { ServerLocation } from "@reach/router";
 
-export default App => 
+export default App =>
   class SSR extends Component<{
-    store: any,
-    url: string
+    store: any;
+    url: string;
   }> {
     render() {
       return (
@@ -16,4 +16,4 @@ export default App =>
         </Provider>
       );
     }
-  }
+  };

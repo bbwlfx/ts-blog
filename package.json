@@ -81,13 +81,18 @@
     "webpack-dev-server": "^3.1.5",
     "webpack-manifest-plugin": "^2.0.3",
     "webpack-merge": "^4.1.3",
+    "webpack-node-externals": "^1.7.2",
     "write-file-webpack-plugin": "^4.3.2"
   },
   "scripts": {
     "startfe": "run-p client ssr",
-    "client": "BABEL_ENV=client NODE_ENV=development webpack-dev-server --config public/webpack.dev.config.js",
     "start": "BABEL_ENV=server NODE_ENV=development nodemon src/app.ts --exec babel-node --extensions '.ts,.tsx'",
-    "ssr": "BABEL_ENV=ssr NODE_ENV=production webpack --watch --config public/webpack.ssr.config.js",
+    "buildfe": "run-p client:prod ssr:prod",
+    "build": "BABEL_ENV=server NODE_ENV=production babel src -D -d output/src --extensions '.ts,.tsx'",
+    "client": "BABEL_ENV=client NODE_ENV=development webpack-dev-server --config public/webpack.dev.config.js",
+    "ssr": "BABEL_ENV=ssr NODE_ENV=development webpack --watch --config public/webpack.ssr.config.js",
+    "ssr:prod": "BABEL_ENV=ssr NODE_ENV=production webpack --config public/webpack.ssr.config.js",
+    "client:prod": "BABEL_ENV=client NODE_ENV=production webpack --progess --config public/webpack.prod.config.js",
     "precommit": "lint-staged",
     "format": "prettier-eslint --write public/**/*.{js,ts}"
   },

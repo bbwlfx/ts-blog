@@ -1,33 +1,34 @@
 module.exports = {
   presets: [
     [
-      '@babel/env',
+      "@babel/env",
       {
         targets: {
-          node: 'current'
+          node: "current"
         }
       }
     ],
-    '@babel/react',
-    '@babel/typescript'
+    "@babel/react",
+    "@babel/typescript"
   ],
   plugins: [
-    '@babel/plugin-proposal-class-properties',
-    'transform-decorators-legacy',
-    'dynamic-import-node',
+    "@babel/plugin-proposal-class-properties",
+    "transform-decorators-legacy",
+    "dynamic-import-node",
     [
-      'babel-plugin-module-resolver',
+      "babel-plugin-module-resolver",
       {
-        cwd: 'babelrc',
+        cwd: "babelrc",
         alias: {
-          components: '../public/js/components',
-          containers: '../public/js/containers',
-          models: '../public/js/models',
-          controllers: './controllers',
-          decorators: '../public/js/decorators',
-          server: '../dist/server'
+          components: "../public/js/components",
+          containers: "../public/js/containers",
+          models: "../public/js/models",
+          controllers: "./controllers",
+          decorators: "../public/js/decorators",
+          server: "./public/buildServer",
+          lib: "../public/js/lib"
         },
-        extensions: ['.ts', '.tsx', '.js', '.jsx']
+        extensions: [".ts", ".tsx", ".js", ".jsx"]
       }
     ]
   ]

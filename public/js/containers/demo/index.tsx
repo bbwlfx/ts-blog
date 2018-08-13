@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Button } from 'antd';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Button } from "antd";
 
 interface DemoProps {
-  count?: number,
-  outstr?: string,
-  Add?: React.MouseEventHandler<HTMLButtonElement>,
-  Reverse?: React.MouseEventHandler<HTMLButtonElement> 
-};
+  count?: number;
+  outstr?: string;
+  Add?: React.MouseEventHandler<HTMLButtonElement>;
+  Reverse?: React.MouseEventHandler<HTMLButtonElement>;
+}
 
 interface DemoState {
-  count: Number,
-  outstr: String,
+  count: Number;
+  outstr: String;
 }
 
 class Demo extends Component<DemoProps, DemoState> {
   static defaultProps = {
     count: 0,
-    outstr: 'Hello World',
+    outstr: "Hello World",
     Add: () => {},
     Reverse: () => {}
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -34,8 +34,12 @@ class Demo extends Component<DemoProps, DemoState> {
     const { Add, Reverse, count, outstr } = this.props;
     return (
       <div>
-        <Button onClick={Reverse}>click me to Reverse words</Button>{outstr}
-        <Button onClick={Add}>click me to add number</Button> now number is : {count}
+        <Button type="primary" onClick={Reverse}>
+          click me to Reverse words
+        </Button>
+        {outstr}
+        <Button onClick={Add}>click me to add number</Button> now number is :{" "}
+        {count}
       </div>
     );
   }
@@ -45,5 +49,8 @@ const mapStateToProps = (store: any) => ({ ...store.demo });
 const mapDispatchToProps = (store: any) => ({
   Add: store.demo.add,
   Reverse: store.demo.reverse
-})
-export default connect(mapStateToProps, mapDispatchToProps)(Demo);
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Demo);

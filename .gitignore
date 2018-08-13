@@ -1,7 +1,10 @@
 /node_modules/
-/dist/
+dist/*
 server/public/
 .cache/
 .db/
 .vscode/
 *.log
+package-lock.json
+/output/*
+/src/public
