@@ -27,6 +27,16 @@ const utils = {
         );
       }
     });
+  },
+  fetchData(props, fn) {
+    const { location, url } = props;
+    if (!location || !url) {
+      fn();
+      return;
+    }
+    if (location.pathname !== url) {
+      fn();
+    }
   }
 };
 

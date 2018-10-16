@@ -3,4 +3,5 @@ export interface DemoProps {
   outstr?: string;
   Add?: (num: number) => {};
   Reverse?: () => {};
+  prefetchData?: () => {};
 }

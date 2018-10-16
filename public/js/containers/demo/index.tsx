@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button } from "antd";
 import { DemoProps } from "typings";
+import utils from "lib/utils";
 import "./demo.scss";
 
 class Demo extends Component<DemoProps> {
@@ -14,6 +15,10 @@ class Demo extends Component<DemoProps> {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    utils.fetchData(this.props, this.props.prefetchData);
   }
 
   render() {
@@ -31,10 +36,14 @@ class Demo extends Component<DemoProps> {
   }
 }
 
-const mapStateToProps = (store: any) => ({ ...store.demo });
+const mapStateToProps = (store: any) => ({
+  ...store.demo,
+  url: store.common.url
+});
 const mapDispatchToProps = (dispatch: any) => ({
   Add: dispatch.demo.add,
-  Reverse: dispatch.demo.reverse
+  Reverse: dispatch.demo.reverse,
+  prefetchData: dispatch.demo.prefetchData
 });
 export default connect(
   mapStateToProps,

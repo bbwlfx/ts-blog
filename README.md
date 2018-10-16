@@ -29,7 +29,7 @@
 
 `$ npm run start` 启动node代码
 
-访问`localhost:4000/demo`查看
+访问`localhost:7999/`查看
 
 #### 生产环境
 

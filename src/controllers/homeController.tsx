@@ -8,6 +8,9 @@ interface homeState {
 const home: homeState = {
   async index(ctx) {
     const store = configureStore({
+      common: {
+        url: ctx.url
+      },
       todolist: {
         list: []
       }
@@ -32,6 +35,9 @@ const home: homeState = {
 
   async demo(ctx) {
     const store = configureStore({
+      common: {
+        url: ctx.url
+      },
       demo: {
         count: 10,
         outstr: "Hello World!"
