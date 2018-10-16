@@ -2,25 +2,25 @@ import { demoModalState } from "typings";
 import { createModel } from "@rematch/core";
 
 export const demo = createModel({
-  state: ({} as any) as demoModalState,
+  state: ({
+    outstr: "Hello World",
+    count: 10
+  } as any) as demoModalState,
   reducers: {
     "@init": (state: demoModalState, init: demoModalState) => {
-      return { ...state, ...init };
+      state = init;
+      return state;
     },
     add(state: demoModalState, num) {
-      return {
-        ...state,
-        count: state.count + (num | 1)
-      };
+      state.count = state.count + (num || 1);
+      return state;
     },
     reverse(state: demoModalState) {
-      return {
-        ...state,
-        outstr: state.outstr
-          .split("")
-          .reverse()
-          .join("")
-      };
+      state.outstr = state.outstr
+        .split("")
+        .reverse()
+        .join("");
+      return state;
     }
   },
   effects: dispatch => ({

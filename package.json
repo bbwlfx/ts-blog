@@ -15,7 +15,7 @@
     "@koa/cors": "^2.2.2",
     "@reach/router": "^1.1.1",
     "@rematch/core": "^1.0.0-beta.4",
-    "@rematch/immer": "^1.0.1",
+    "@rematch/immer": "^1.1.0",
     "@types/classnames": "^2.2.4",
     "@types/draft-js": "^0.10.23",
     "@types/koa": "^2.0.46",

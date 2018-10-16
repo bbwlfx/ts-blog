@@ -23,7 +23,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(css|sass)$/,
+        test: /\.(css|scss)$/,
         loader: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: ["css-loader", "sass-loader"]
@@ -31,19 +31,21 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "less-loader",
-            options: {
-              modifyVars: {
-                "primary-color": "#1DA57A"
-              },
-              javascriptEnabled: true
+        loader: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            "css-loader",
+            {
+              loader: "less-loader",
+              options: {
+                modifyVars: {
+                  "primary-color": "#1DA57A"
+                },
+                javascriptEnabled: true
+              }
             }
-          }
-        ]
+          ]
+        })
       },
       {
         test: /\.md$/,

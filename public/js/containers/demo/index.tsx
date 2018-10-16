@@ -1,22 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button } from "antd";
-import { DemoProps, DemoState } from "typings";
+import { DemoProps } from "typings";
+import "./demo.scss";
 
-class Demo extends Component<DemoProps, DemoState> {
-  static defaultProps = {
+class Demo extends Component<DemoProps> {
+  static defaultProps: DemoProps = {
     count: 0,
     outstr: "Hello World",
-    Add: () => {},
-    Reverse: () => {}
+    Add: () => void {},
+    Reverse: () => void {}
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      count: props.count,
-      outstr: props.outstr
-    };
   }
 
   render() {
@@ -26,18 +23,18 @@ class Demo extends Component<DemoProps, DemoState> {
         <Button type="primary" onClick={Reverse}>
           click me to Reverse words
         </Button>
-        {outstr}
-        <Button onClick={Add}>click me to add number</Button> now number is :{" "}
-        {count}
+        <span className="output">{outstr}</span>
+        <Button onClick={() => Add(1)}>click me to add number</Button> now
+        number is : {count}
       </div>
     );
   }
 }
 
 const mapStateToProps = (store: any) => ({ ...store.demo });
-const mapDispatchToProps = (store: any) => ({
-  Add: store.demo.add,
-  Reverse: store.demo.reverse
+const mapDispatchToProps = (dispatch: any) => ({
+  Add: dispatch.demo.add,
+  Reverse: dispatch.demo.reverse
 });
 export default connect(
   mapStateToProps,

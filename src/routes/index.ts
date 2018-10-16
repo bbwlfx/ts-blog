@@ -1,7 +1,9 @@
 import Router from "koa-router";
-import demoController from "controllers/demoController";
+import homeController from "controllers/homeController";
 
 const router = Router();
 
-router.get("/demo", demoController.index);
+router.get("/", homeController.index);
+router.get("/demo", homeController.demo);
+
 export default router;
