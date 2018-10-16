@@ -75,6 +75,7 @@
     "sequelize-cli": "^4.0.0",
     "style-loader": "^0.21.0",
     "stylelint": "^9.4.0",
+    "stylelint-config-standard": "^18.2.0",
     "ts-loader": "^4.4.2",
     "typescript": "^2.9.2",
     "webpack": "^4.16.2",
@@ -106,7 +107,7 @@
       "npm run format --",
       "git add"
     ],
-    "*.{css,less}": [
+    "*.{css,less,scss}": [
       "npm run format --",
       "stylelint --syntax=less",
       "git add"
