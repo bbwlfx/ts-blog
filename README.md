@@ -5,7 +5,7 @@
 - TypeScript
 - Koa@2
 - Webpack@4
-- @reach/router
+- react-router
 - SSR
 - Pug
 
@@ -15,7 +15,7 @@
 - src Node代码
 - scripts 辅助脚本
 - src/public 打包输出文件
-- template 模板文件
+- src/template 模板文件
 - output 生产环境打包文件
 
 ### 启动
