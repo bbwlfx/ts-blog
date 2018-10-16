@@ -20,14 +20,6 @@
 
 ### 启动
 
-> 暂时只配置了开发模式的启动，生产模式以后配置
-项目启动需要nginx代理，若本地无nginx请先安装nginx，然后将`./nginx/site.local.conf`文件拷贝到`/usr/local/etc/nginx/servers文件夹下`
-
-```
-$ cp nginx/site.local.conf /usr/local/etc/nginx/servers
-```
-
-
 #### 开发环境
 > 第一次启动执行完startfe之后再执行start
 
@@ -37,7 +29,7 @@ $ cp nginx/site.local.conf /usr/local/etc/nginx/servers
 
 `$ npm run start` 启动node代码
 
-访问`localhost:5777/demo`查看
+访问`localhost:4000/demo`查看
 
 #### 生产环境
 

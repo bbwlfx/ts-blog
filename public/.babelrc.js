@@ -27,7 +27,6 @@ module.exports = api => {
       "@babel/typescript"
     ],
     plugins: [
-      "transform-decorators-legacy",
       ["import", importConfig],
       "dynamic-import-node",
       "@babel/plugin-proposal-class-properties",
@@ -43,7 +42,8 @@ module.exports = api => {
             models: "./js/models",
             decorators: "./js/decorators",
             constants: "./js/constants",
-            lib: "./js/lib"
+            lib: "./js/lib",
+            typings: "./js/typings"
           }
         }
       ],

@@ -9,11 +9,12 @@ const demo: object = {
         outstr: "Hello World!"
       }
     });
-    const page = getPage({
+    const page = await getPage({
       store,
       url: ctx.url,
       Component: Entry,
-      page: "demo"
+      page: "demo",
+      model: "demo"
     });
     ctx.render(page);
   }

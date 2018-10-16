@@ -4,7 +4,14 @@ import { getScript, getStyle } from "./bundle";
 import { renderToString } from "react-dom/server";
 import Loadable from "react-loadable";
 
-export default function getPage({ store, url, Component, page }) {
+export default async function getPage({
+  store,
+  url,
+  Component,
+  page,
+  model,
+  params = {}
+}) {
   const manifest = require("../public/buildPublic/manifest.json");
   const mainjs = getScript(manifest[`${page}.js`]);
   const maincss = getStyle(manifest[`${page}.css`]);
@@ -30,22 +37,27 @@ export default function getPage({ store, url, Component, page }) {
     </Loadable.Capture>
   );
 
+  // prefetch first screen data
+  if (store.dispatch[model] && store.dispatch[model].prefetchData) {
+    await store.dispatch[model].prefetchData(params);
+  }
+
   const html = renderToString(dom);
 
   const stats = require("../public/buildPublic/react-loadable.json");
   let bundles: any[] = getBundles(stats, modules);
 
-  const styles = bundles
+  const _styles = bundles
     .filter(bundle => bundle && bundle.file.endsWith(".css"))
     .map(bundle => getStyle(bundle.publicPath))
-    // .concat(maincss)
-    .join("\n");
+    .concat(maincss);
+  const styles = [...new Set(_styles)].join("\n");
 
-  const scripts = bundles
+  const _scripts = bundles
     .filter(bundle => bundle && bundle.file.endsWith(".js"))
     .map(bundle => getScript(bundle.publicPath))
-    // .concat(mainjs)
-    .join("\n");
+    .concat(mainjs);
+  const scripts = [...new Set(_scripts)].join("\n");
 
   return {
     html,

@@ -1,18 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button } from "antd";
-
-interface DemoProps {
-  count?: number;
-  outstr?: string;
-  Add?: React.MouseEventHandler<HTMLButtonElement>;
-  Reverse?: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-interface DemoState {
-  count: Number;
-  outstr: String;
-}
+import { DemoProps, DemoState } from "typings";
 
 class Demo extends Component<DemoProps, DemoState> {
   static defaultProps = {

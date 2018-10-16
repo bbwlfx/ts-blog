@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
+const config = require("../src/config");
 const entry = require("./js/scripts/get_entry");
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
   context: __dirname,
   output: {
     path: path.resolve(__dirname, "../src/public"),
-    publicPath: `/static/`,
+    publicPath: `${config.webpack.publicPath}/static/`,
     filename: "[name].js",
     chunkFilename: "chunk.[name].js"
   },
